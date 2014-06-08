@@ -11,7 +11,8 @@ app = express()
 Vector.registerProtocols tilelive
 
 tilelive.protocols["mapbox:"] = Source = (uri, callback) ->
-  new TileJSON("http://a.tiles.mapbox.com/v3" + uri.pathname + ".json", callback)
+  new TileJSON("http://a.tiles.mapbox.com/v3#{uri.pathname}.json", callback)
+  return
 
 filename = __dirname + "/osm-bright.tm2z"
 Vector.mapnik.register_fonts __dirname + "/fonts/"
