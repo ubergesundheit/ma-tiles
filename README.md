@@ -7,17 +7,9 @@ Using
 - [nginx](http://nginx.org/)
 
 
-## nginx config
-your config should at least contain the following:
+## Usage
 
-```
-  root <THE_ABSOLUTE_PATH_TO_THIS_DIRECTORY>/tiles/;
-
-  location ~* ^/tiles/(?<tile_path>.*)$ {
-    try_files $tile_path @node;
-  }
-
-  location @node {
-    proxy_pass http://localhost:8888;
-  }
-```
+- install [docker](https://www.docker.io)
+- build the image `sudo docker build -t ma-tiles .`
+- run it `sudo docker run -p 80:80 -d ma-tiles`
+- fetch tiles `http://your-host/tiles/z/x/y.png`
