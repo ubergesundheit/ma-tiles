@@ -32,9 +32,11 @@ tilelive.load "tm2z://" + filename, (err, source) ->
       # `tile` contains the compressed image file as a Buffer
       # `headers` is a hash with HTTP headers for the image.
       unless err
+        content_type = headers['Content-Type']
+        file_extension = content_type.split('/')[1]
         mkdirp filepath, (err) ->
           unless err
-            fs.open "#{filepath}#{y}.png", "w", (err, file) ->
+            fs.open "#{filepath}#{y}.#{file_extension}", "w", (err, file) ->
               unless err
                 fs.write file, tile, 0, tile.length, null, (err, written, buffer) ->
                   fs.close file
@@ -48,8 +50,7 @@ tilelive.load "tm2z://" + filename, (err, source) ->
             console.log 'error creating directories', err
 
           return
-
-        res.set('Content-Type', 'image/png')
+        res.set('Content-Type', content_type)
         res.send tile
 
       else
