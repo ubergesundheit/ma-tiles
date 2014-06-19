@@ -49,6 +49,7 @@ tilelive.load "tm2z://" + filename, (err, source) ->
 
           return
 
+        res.set('Content-Type', 'image/png')
         res.send tile
 
       else
