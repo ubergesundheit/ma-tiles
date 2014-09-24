@@ -3,15 +3,18 @@ express = require "express"
 tilelive = require "tilelive"
 Vector = require "tilelive-vector"
 TileJSON = require "tilejson"
+tmsource = require 'tilelive-tmsource'
 fs = require "fs"
 mkdirp = require "mkdirp"
 
 app = express()
 
+access_token = "<MAPBOX ACCESS TOKEN>";
+
 Vector.registerProtocols tilelive
 
 tilelive.protocols["mapbox:"] = Source = (uri, callback) ->
-  new TileJSON("http://a.tiles.mapbox.com/v3#{uri.pathname}.json", callback)
+  new TileJSON("http://api.tiles.mapbox.com/v4#{uri.pathname}.json?access_token=#{access_token}", callback)
   return
 
 filename = __dirname + "/osm-bright.tm2z"
