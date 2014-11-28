@@ -9,7 +9,7 @@ mkdirp = require "mkdirp"
 
 app = express()
 
-access_token = "<MAPBOX ACCESS TOKEN>";
+access_token = process.env.MAPBOX_ACCESS_TOKEN
 
 Vector.registerProtocols tilelive
 

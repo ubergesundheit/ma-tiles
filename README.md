@@ -10,6 +10,8 @@ Using
 ## Usage
 
 - install [docker](https://www.docker.io)
-- build the image `sudo docker build -t ma-tiles .`
-- run it `sudo docker run -p 80:80 -d ma-tiles`
-- fetch tiles `http://your-host/tiles/z/x/y.png`
+- install [fig](http://www.fig.sh)
+- obtain a [Mapbox access token](https://www.mapbox.com/help/create-api-access-token/) and put it into your `fig.yml`
+- build the image `sudo fig build`
+- run it `sudo fig up` or `sudo fig up -d` if you want to start as a daemon
+- fetch tiles `http://your-host:9999/tiles/z/x/y.png`
