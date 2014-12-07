@@ -17,7 +17,7 @@ tilelive.protocols["mapbox:"] = Source = (uri, callback) ->
   new TileJSON("http://api.tiles.mapbox.com/v4#{uri.pathname}.json?access_token=#{access_token}", callback)
   return
 
-filename = __dirname + "/osm-bright.tm2z"
+filename = __dirname + "/#{process.env.TM2Z_FILE}"
 Vector.mapnik.register_fonts __dirname + "/fonts/"
 
 

@@ -2,5 +2,6 @@ app:
   build: .
   environment:
     MAPBOX_ACCESS_TOKEN: <obtain_at_ https://www.mapbox.com/help/create-api-access-token/ >
+    TM2Z_FILE: osm-bright.tm2z
   ports:
     - "9999:80"
