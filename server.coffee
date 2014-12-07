@@ -10,6 +10,7 @@ mkdirp = require "mkdirp"
 app = express()
 
 access_token = process.env.MAPBOX_ACCESS_TOKEN
+style_name = process.env.STYLE_NAME || 'osm-bright'
 
 Vector.registerProtocols tilelive
 
@@ -17,7 +18,7 @@ tilelive.protocols["mapbox:"] = Source = (uri, callback) ->
   new TileJSON("http://api.tiles.mapbox.com/v4#{uri.pathname}.json?access_token=#{access_token}", callback)
   return
 
-filename = __dirname + "/#{process.env.TM2Z_FILE}"
+filename = __dirname + "/#{style_name}.tm2z"
 Vector.mapnik.register_fonts __dirname + "/fonts/"
 
 
@@ -25,7 +26,7 @@ tilelive.load "tm2z://" + filename, (err, source) ->
   console.log "Listening on port: " + 8888
   app.listen 8888
   throw err  if err
-  app.get "/tiles/:z/:x/:y.*", (req, res) ->
+  app.get "/#{style_name}/:z/:x/:y.*", (req, res) ->
     z = req.param("z")
     x = req.param("x")
     y = req.param("y")

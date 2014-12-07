@@ -12,6 +12,7 @@ Using
 - install [docker](https://www.docker.io)
 - install [fig](http://www.fig.sh)
 - obtain a [Mapbox access token](https://www.mapbox.com/help/create-api-access-token/) and put it into your `fig.yml`
+- configure the `fig.yml`. the `STYLE_NAME` variable will determine the url of the tiles.
 - build the image `sudo fig build`
 - run it `sudo fig up` or `sudo fig up -d` if you want to start as a daemon
-- fetch tiles `http://your-host:9999/tiles/z/x/y.png`
+- fetch tiles `http://your-host:9999/STYLE_NAME/z/x/y.png`
