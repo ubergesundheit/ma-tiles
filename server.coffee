@@ -26,7 +26,7 @@ tilelive.load "tm2z://" + filename, (err, source) ->
   console.log "Listening on port: " + 8888
   app.listen 8888
   throw err  if err
-  app.get "/#{style_name}/:z/:x/:y.*", (req, res) ->
+  app.get "/:z/:x/:y.*", (req, res) ->
     z = req.param("z")
     x = req.param("x")
     y = req.param("y")
