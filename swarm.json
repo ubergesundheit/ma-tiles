@@ -1,0 +1,24 @@
+{
+  "app_name": "mb-tiles",
+  "services": [
+    {
+      "service_name": "tiles",
+      "components": [
+        {
+          "component_name": "tiles",
+          "image": "ubergesundheit/mb-tiles",
+          "env": [
+            "MAPBOX_ACCESS_TOKEN=<obtain_at_ https://www.mapbox.com/help/create-api-access-token/ >",
+            "STYLE_NAME=osm-bright"
+          ],
+          "ports": [
+            "80/tcp"
+          ],
+          "domains": {
+            "tiles.gigantic.io": "80"
+          }
+        }
+      ]
+    }
+  ]
+}
