@@ -1,4 +1,4 @@
-FROM node:latest
+FROM dockerfile/nodejs
 
 RUN mkdir /tilelive
 WORKDIR /tilelive

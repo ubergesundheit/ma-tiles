@@ -12,6 +12,6 @@ nginx:
   volumes_from:
     - renderer
   volumes:
-    - ./nginx-default.conf:/etc/nginx/conf.d/default
+    - ./nginx-default.conf:/etc/nginx/conf.d/default.conf
   ports:
     - "8080:80"
