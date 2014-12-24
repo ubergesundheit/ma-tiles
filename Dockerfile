@@ -1,17 +1,10 @@
 FROM node:latest
 
-RUN apt-get update
-
-RUN apt-get install -y nginx
-
-ADD nginx-default.conf /etc/nginx/sites-available/default
-
-ADD . /tilelive
+RUN mkdir /tilelive
 WORKDIR /tilelive
-
-
+COPY package.json /tilelive/package.json
 RUN npm install
+ADD . /tilelive
 
-EXPOSE 80
 
-CMD [ "/bin/bash", "startscript.sh" ]
+CMD [ "npm", "start" ]
