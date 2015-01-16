@@ -29,10 +29,10 @@ tilelive.load "tm2z://" + filename, (err, source) ->
 
   respondWithTile = (req, res) ->
 
-    z = req.param("z")
-    x = req.param("x")
-    y = req.param("y")
-    scale = parseInt(req.param("scale")[1..-2]) if req.param("scale")?
+    z = req.params.z
+    x = req.params.x
+    y = req.params.y
+    scale = parseInt(req.params.scale[1..-2]) if req.params.scale?
 
     filepath = "tiles/#{z}/#{x}/"
     renderCallback = (err, tile, headers) ->
