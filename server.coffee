@@ -25,13 +25,17 @@ Vector.mapnik.register_fonts __dirname + "/fonts/"
 tilelive.load "tm2z://" + filename, (err, source) ->
   console.log "Listening on port: " + 8888
   app.listen 8888
-  throw err  if err
-  app.get "/:z/:x/:y.*", (req, res) ->
+  throw err if err
+
+  respondWithTile = (req, res) ->
+
     z = req.param("z")
     x = req.param("x")
     y = req.param("y")
+    scale = parseInt(req.param("scale")[1..-2]) if req.param("scale")?
+
     filepath = "tiles/#{z}/#{x}/"
-    source.getTile z, x, y, (err, tile, headers) ->
+    renderCallback = (err, tile, headers) ->
       # `err` is an error object when generation failed, otherwise null.
       # `tile` contains the compressed image file as a Buffer
       # `headers` is a hash with HTTP headers for the image.
@@ -40,7 +44,8 @@ tilelive.load "tm2z://" + filename, (err, source) ->
         file_extension = content_type.split('/')[1]
         mkdirp filepath, (err) ->
           unless err
-            fs.open "#{filepath}#{y}.#{file_extension}", "w", (err, file) ->
+            if scale? then scalestr = "@#{scale}x" else scalestr = ""
+            fs.open "#{filepath}#{y}#{scalestr}.#{file_extension}", "w", (err, file) ->
               unless err
                 fs.write file, tile, 0, tile.length, null, (err, written, buffer) ->
                   fs.close file
@@ -61,9 +66,13 @@ tilelive.load "tm2z://" + filename, (err, source) ->
         res.send "Tile rendering error: " + err + "\n"
 
       return
+    renderCallback.scale = scale
+    source.getTile z, x, y, renderCallback
 
     return
 
+  app.get "/:z(\\d+)/:x(\\d+)/:y(\\d+):scale(@\\d+x).*", respondWithTile
+  app.get "/:z(\\d+)/:x(\\d+)/:y(\\d+).*", respondWithTile
   return
 
 console.log 'starting server, please stand by!'
