@@ -2,11 +2,11 @@ renderer:
   build: .
   environment:
     MAPBOX_ACCESS_TOKEN: pk.eyJ1IjoidWJlcmdlc3VuZGhlaXQiLCJhIjoiaHhTeV9WcyJ9.jditXHYWvnJegWSfrFGV3w
-    STYLE_NAME: slate
+    STYLE_NAME: osm-bright
   volumes:
     - ./tile-cache:/tilelive/tiles
 nginx:
-  image: nginx:1.7.8
+  image: nginx:1.7.10
   links:
     - renderer
   volumes_from:
