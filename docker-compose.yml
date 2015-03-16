@@ -1,8 +1,8 @@
 renderer:
   build: .
   environment:
-    MAPBOX_ACCESS_TOKEN: <obtain_at_ https://www.mapbox.com/help/create-api-access-token/ >
-    STYLE_NAME: osm-bright
+    MAPBOX_ACCESS_TOKEN: pk.eyJ1IjoidWJlcmdlc3VuZGhlaXQiLCJhIjoiaHhTeV9WcyJ9.jditXHYWvnJegWSfrFGV3w
+    STYLE_NAME: slate
   volumes:
     - ./tile-cache:/tilelive/tiles
 nginx:
