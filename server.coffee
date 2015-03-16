@@ -14,9 +14,12 @@ style_name = process.env.STYLE_NAME || 'osm-bright'
 
 Vector.registerProtocols tilelive
 
-tilelive.protocols["mapbox:"] = Source = (uri, callback) ->
+tilelive.protocols["mapbox:"] = (uri, callback) ->
   new TileJSON("http://api.tiles.mapbox.com/v4#{uri.pathname}.json?access_token=#{access_token}", callback)
   return
+
+tilelive.protocols["http:"] = TileJSON
+tilelive.protocols["https:"] = TileJSON
 
 filename = __dirname + "/#{style_name}.tm2z"
 Vector.mapnik.register_fonts __dirname + "/fonts/"
